@@ -1,4 +1,4 @@
-package main.java.com.mygroup.sevice;
+package com.mygroup.sevice;
 
 /**
  * Created by Administrator on 2018/1/10.

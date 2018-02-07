@@ -1,4 +1,4 @@
-package main.java.com.mygroup.action;
+package com.mygroup.action;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StartAction {
     @RequestMapping("/index")
     public String SayHello() {
-        return "hello";
+        return "index";
     }
 }

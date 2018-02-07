@@ -1,7 +1,7 @@
-package main.java.com.mygroup.seviceimpl;
+package com.mygroup.seviceimpl;
 
-import main.java.com.mygroup.dao.VirtualDataDao;
-import main.java.com.mygroup.sevice.Nintendo;
+import com.mygroup.dao.VirtualDataDao;
+import com.mygroup.sevice.Nintendo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

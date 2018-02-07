@@ -1,4 +1,4 @@
-package main.java.com.mygroup.seviceimpl;
+package com.mygroup.seviceimpl;
 
 /**
  * Created by Administrator on 2018/1/9.

@@ -1,4 +1,4 @@
-package main.java.com.mygroup.util;
+package com.mygroup.util;
 
 /**
  * Created by Administrator on 2018/1/10.

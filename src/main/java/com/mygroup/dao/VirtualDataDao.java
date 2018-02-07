@@ -1,4 +1,4 @@
-package main.java.com.mygroup.dao;
+package com.mygroup.dao;
 
 import org.springframework.stereotype.Service;
 
