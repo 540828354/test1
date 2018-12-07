@@ -5,6 +5,11 @@ import com.framework.exception.StrangeException;
 import com.mygroup.model.request.BaseRequest;
 import com.mygroup.model.response.Response;
 import com.mygroup.model.vo.Book;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -12,6 +17,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,6 +60,8 @@ public class MyFirstAction {
 
     @RequestMapping("/play")
     public String nintendoPlay(HttpServletRequest request, BaseRequest baseRequest, @RequestParam(value = "where" ,required = false,defaultValue = "haha") String whereAreYou) {
+        // 默认的client类。
+
         System.out.println(whereAreYou);
         return "nintendo";
     }
@@ -104,5 +115,51 @@ public class MyFirstAction {
 //        System.out.println("in testExceptionHandler");
 //        return mv;
 //    }
+
+    public static void main(String args[]) {
+        HttpClient client = new DefaultHttpClient();
+        // 设置为get取连接的方式.
+        HttpGet get = new HttpGet("https://m.lvmama.com/client-service/router/rest.do?method=api.com.flight.city.getCitys&version=1.0.0&city=上海");
+        StringBuffer dataStr = new StringBuffer();
+        InputStream content = null;
+        InputStreamReader insr = null;
+        BufferedReader reader = null;
+        String tmp_str = "";
+        try {
+            HttpResponse response = client.execute(get);
+            content = response.getEntity().getContent();
+            insr = new InputStreamReader(content, "UTF-8");
+            reader = new BufferedReader(insr);
+            while ((tmp_str = reader.readLine()) != null) {
+                dataStr.append(tmp_str);
+            }
+        } catch (ClientProtocolException e) {
+            System.out.println("关闭文件流异常···");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("关闭文件流异常···");
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (insr != null) {
+                    insr.close();
+                }
+                if (content != null) {
+                    content.close();
+                }
+            } catch (IOException e) {
+                System.out.println("关闭文件流异常···");
+                e.printStackTrace();
+            } finally {
+                client.getConnectionManager().shutdown();
+                System.out.println(tmp_str+"end");
+            }
+
+        }
+    }
 
 }
